@@ -8,6 +8,8 @@ gem 'rails', '~> 7.0.3'
 
 gem 'devise'
 
+gem 'cancancan'
+
 gem 'rubocop', '>= 1.0', '< 2.0'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
