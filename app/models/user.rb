@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_many :categories
   has_many :expanses
+
+  validates :name, presence: true, length: { in: 3..30 }
 end

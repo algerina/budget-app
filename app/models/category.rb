@@ -1,3 +1,5 @@
 class Category < ApplicationRecord
-  has_many :expanses_by_categories
+  belongs_to :user
+  has_many :expanse_categories
+  # has_many :expenses, through :expanse_categories
 end
