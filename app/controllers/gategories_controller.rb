@@ -1,7 +1,20 @@
 class GategoriesController < ApplicationController
-  def index; end
+  def index
+  @categories = Category.all
+end
 
-  def new; end
+def show 
+end
 
-  def create; end
+  def new
+  @category = category.new
+  end
+
+  def create
+  @category = category.new(category_params)
+  end
+
+  def category_params
+    params.require(:category).permit(:name, :icon, :user_id)
+  end
 end
