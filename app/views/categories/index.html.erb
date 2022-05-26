@@ -6,6 +6,7 @@
     <% @categories.each do |category| %>
           <li>
         <%= link_to add_expense_path(category.name) do %>
+            <%= user.name %>
             <%= category.name %>
             <%= category.icon %>
         <% end %> 

@@ -1,8 +1,9 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_category, only: %i[show edit update destroy]
+
   def index
-  @categories = Category.all
-  # @current_user = Current_user
+  @categories = current_user.categories
 end
 
   def new
@@ -10,14 +11,19 @@ end
   end
 
   def create
-    @category = Category.new(category_params.merge(user: current_user))
-    if @category.save
-      flash[:success] = 'Category has been added successfully'
-      redirect_to categories_path
+    @category = Category.new(user_id: current_user.id, name: category_params[:name], icon: category_params[:icon])
+    flash[:notice] = if @category.save
+      'Category created with success'
     else
-      flash[:alert] = 'Category  not added'
-      redirect_to new_category_path
+      'Try again'
     end
+redirect_to categories_path
+end
+
+  private
+
+  def set_category
+    @category = Category.includes(:expanses).find(params[:id])
   end
 
   def category_params
