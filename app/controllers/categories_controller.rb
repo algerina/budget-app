@@ -1,32 +1,28 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_category, only: %i[show edit update destroy]
 
   def index
-  @categories = current_user.categories
-end
+    @categories = Category.where(author_id: current_user.id)
+  end
 
   def new
     @category = Category.new
   end
 
   def create
-    @category = Category.new(user_id: current_user.id, name: category_params[:name], icon: category_params[:icon])
-    flash[:notice] = if @category.save
-      'Category created with success'
+    @category = current_user.categories.new(category_params)
+
+    if @category.save
+      redirect_to categories_path, notice: 'Category created!'
     else
-      'Try again'
+      flash[:alert] = 'Try again!'
+      render :new
     end
-redirect_to categories_path
-end
+  end
 
   private
 
-  def set_category
-    @category = Category.includes(:expanses).find(params[:id])
-  end
-
   def category_params
-    params.require(:category).permit(:name, :icon, :user_id)
+    params.require(:category).permit(:name, :icon)
   end
 end

@@ -1,6 +1,9 @@
 class ExpanseCategory < ApplicationRecord
+  belongs_to :expanse, class_name: 'Expanse'
+  belongs_to :category, class_name: 'Category'
 
-  belongs_to :category, dependent: :destroy
-  belongs_to :Expanse, dependent: :destroy
-
+  after_create :update_total_expanses
+  def update_total_expanses
+    group.increment!(:total_expanses, expanse.amount)
+  end
 end

@@ -1,21 +1,23 @@
 <section>
 
   <h2 class="text-center mb-3">Categories</h2>
-<div >
-      <ul>          
-    <% @categories.each do |category| %>
-          <li>
-        <%= link_to add_expense_path(category.name) do %>
-            <%= user.name %>
-            <%= category.name %>
-            <%= category.icon %>
-        <% end %> 
-          </li>
-    <% end %>
-      </ul>     
-  </div>
-<div class="text-center d-grid gap-2">
-  <%= link_to "New category", new_category_path, class:'btn btn-primary btn-lg' %>
-</div>
 
-</div>
+
+<% @categories.each do |category| %>
+    <%= link_to category_expanses_path(category), class: "text-reset text-decoration-none" do %>
+      <div class="border border-1 d-flex my-3">
+        <img src="<%= category.icon%>" width="80px">
+        <h3 
+          class="m-2"><%= category.name %> 
+          <span class="d-block fs-6 fw-lighter mt-3"><%= "#{category.created_at.day}/#{category.created_at.month}/#{category.created_at.year}" %></span>
+        </h3>
+        <div class="ms-auto pt-5 pe-3">
+          <%= category.total_amount || 0 %> $
+        </div>
+      </div>
+    <% end %>
+ <% end %>
+
+  <div class="fixed-bottom mb-3 text-center">
+   <%= link_to 'Add New Category', new_group_path, class:"btn btn-success fs-3 w-75"  %>
+  </div>

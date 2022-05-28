@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :categories
-  has_many :expanses
+  has_many :categories,  foreign_key: 'author_id', class_name: 'Category'
+  has_many :expanses, foreign_key: 'author_id', class_name: 'Expanse'
 
-  validates :name, presence: true, length: { in: 3..30 }
+  validates :name, presence: true
 end
