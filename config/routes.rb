@@ -1,29 +1,16 @@
 Rails.application.routes.draw do
-  get 'home/index'
   devise_for :users
-  
-  resources :categories do
-    resources :expanses
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
   end
-    
-  
-  root "home#index"
 
-  # devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+  authenticated :user do
+    root to: 'categories#index', as: :authenticated_root
+  end
 
-  # devise_scope :user do
-  #   authenticated do
-  #     root to: 'categories#index', as: 'user'
-  #   end
+  resources :categories, only: [:new, :create, :index] do 
+    resources :expanses, only: [:new, :create, :index]
+  end
 
-    # unauthenticated do
-    #   root to: 'home#index', as: 'unauthenticated_user_root'
-    # end
-    
-  #   get '/auth/logout', to: 'devise/sessions#destroy'
-  # end
-
-  # resources :categories do
-  #   resources :expanses
-  # end
+  root to: 'home#index'
 end

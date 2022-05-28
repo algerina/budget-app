@@ -1,27 +1,19 @@
-<header class="navigation">
-  <div class="nav-link">
-  <%= link_to '<', categories_path %>
-  </div>
-  <h1>New Transaction</h1>
-  <div class="logout">
-     <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete} %>
-  </div>
-</header>
- <p class="notice"><%= notice %></p>
- <p class="alert"><%= alert %></p>
-<div>
-<%= form_with(model: @expanse) do | form | %>
-  <div class="field">
-      <%= form.text_field :name, class: 'category-input',  placeholder: "Name" %>
+<section class="container">
+  <%= form_with url:  category_expanses_path, method: :post do |f| %>
+    <div class="field my-3">
+      <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "name", :required => true %>
     </div>
-    <div class="field">
-      <%= form.text_field :amount, class: 'category-input',  placeholder: "Amount" %>
+
+    <div class="field my-3">
+      <%= f.number_field :amount, autofocus: true, class: "form-control", placeholder: "amount", :required => true%>
     </div>
-    <div class="field">
-      <%= form.collection_select :category_ids, current_user.categories.order(:name), :id, :name, {}, {class: 'category-input', multiple: true } %>
+
+    <div class="field my-3">
+      <%= f.select :categories, options_from_collection_for_select(@categories, 'id', 'name'), {}, { class: "form-control" }%>
     </div>
-    <div class="submit-btn">
-      <%= form.submit 'Add New Transaction', class: "submit-btn btn" %>
+
+    <div class="text-center">
+      <%= f.submit "Add Transaction",  class: "btn green" %>
     </div>
-<% end %>
-</div>
+  <% end %>
+</section>

@@ -1,15 +1,9 @@
-<div class="home-page">
-  <div class="home-content">
-    <div class="home-header">
-      <h1>My Budget</h1>
-    </div>
-    <div class="home-authentication">
-      <div class="home-login">
-        <%= link_to 'LOG IN', new_user_session_path%>
-      </div>
-      <div class="home-register">
-       <%= link_to 'SIGN UP', new_user_registration_path%>
-      </div>
-    </div>
+<section class="d-flex flex-column align-items-center gap-3 vh-100" >
+
+<h1>Welcome to Budget!</h1>
+
+  <div class="text-center w-100">
+    <%= link_to "LOG IN", new_user_session_path, class: 'btn blue w-75 mb-1'%>
+    <%= link_to "SIGN UP", new_user_registration_path, class: 'btn blue w-75'%>
   </div>
-</div>
+</section>

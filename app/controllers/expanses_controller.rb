@@ -1,5 +1,4 @@
 class ExpansesController < ApplicationController
-
   def index
     @category = Category.find(params[:category_id])
     @current_user = current_user
