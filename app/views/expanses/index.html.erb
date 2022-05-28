@@ -1,0 +1,18 @@
+<div>
+   <% @expanse_categories.each do |expanse_category| %>
+      <div class="border border-1 d-flex my-3">
+        <img src="https://picsum.photos/200" width="80px">
+        <h3 
+          class="m-2"><%= expanse_category.expanse.name %> 
+          <span class="d-block fs-6 fw-lighter mt-3"><%= "#{expanse_category.created_at.day}/#{expanse_category.created_at.month}/#{expanse_category.created_at.year}" %></span>
+        </h3>
+        <div class="ms-auto pt-5 pe-3">
+          <%= expanse_category.expanse.amount %> $
+        </div>
+      </div>
+  <% end %>
+
+  <div class="fixed-bottom mb-3 text-center">
+   <%= link_to "New Transaction", new_category_expanse_path, class:"btn green fs-3 w-75"  %>
+  </div>
+</div>
