@@ -27,7 +27,6 @@ RSpec.describe 'Signup page', type: :feature do
     expect(page).to have_content('Categories')
   end
 
-
   it 'should error appears if email already taken' do
     @user1.save
     fill_in 'Full Name', with: @user1.name
