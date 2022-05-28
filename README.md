@@ -4,7 +4,6 @@
 
 > This is a mobile web application where Users can manage their budget, they have a list of transactions associated with a category, the user see how much money you spent and on what.
 
-![video](https://www.loom.com/share/838c53a1a80f44a6ad21ba0c10af5bf2)
 
 ## Built With
 
